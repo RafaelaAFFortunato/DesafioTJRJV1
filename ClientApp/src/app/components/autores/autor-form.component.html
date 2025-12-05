@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2>{{ id ? 'Editar Autor' : 'Novo Autor' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <div class="mb-3">
+      <label class="form-label">Nome*</label>
+      <input class="form-control" formControlName="nome" maxlength="40">
+
+      <!-- Mensagem de validação -->
+      <div *ngIf="form.controls['nome'].invalid && form.controls['nome'].touched" class="text-danger mt-1">
+        Nome é obrigatório e deve ter no máximo 40 caracteres
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Salvar</button>
+    <a routerLink="/autores" class="btn btn-secondary ms-2">Cancelar</a>
+
+    <div class="mb-3 mt-2">
+      <label class="form-label">*Campos de preenchimento obrigatório</label>
+    </div>
+
+  </form>
+</div>

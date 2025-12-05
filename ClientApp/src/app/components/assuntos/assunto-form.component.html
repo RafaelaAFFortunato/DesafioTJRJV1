@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2>{{ id ? 'Editar Assunto' : 'Novo Assunto' }}</h2>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="mb-3">
+      <label class="form-label">Descrição*</label>
+      <input class="form-control" formControlName="descricao" maxlength="20">
+      
+      <!-- Mensagem de erro -->
+      <div *ngIf="form.controls['descricao'].invalid && form.controls['descricao'].touched" class="text-danger mt-1">
+        Descrição é obrigatória
+      </div>
+    </div>
+    
+    <button class="btn btn-success" type="submit">Salvar</button>
+    <a routerLink="/assuntos" class="btn btn-secondary ms-2">Cancelar</a>
+    <div class="mb-3"><label class="form-label">*Campos de preenchimento obrigatório</label></div>
+  </form>
+</div>

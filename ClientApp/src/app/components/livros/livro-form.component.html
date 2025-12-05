@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h2>{{ id ? 'Editar Livro' : 'Novo Livro' }}</h2>
+
+  <!-- Mensagem de sucesso -->
+  <div *ngIf="mensagem" class="alert alert-success">
+    {{ mensagem }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <!-- Título -->
+    <div class="mb-3">
+      <label class="form-label">Título*</label>
+      <input class="form-control" formControlName="titulo" maxlength="40">
+      <div *ngIf="form.controls['titulo'].invalid && form.controls['titulo'].touched" class="text-danger mt-1">
+        Campo obrigatório
+      </div>
+    </div>
+
+    <!-- Editora -->
+    <div class="mb-3">
+      <label class="form-label">Editora*</label>
+      <input class="form-control" formControlName="editora" maxlength="40">
+      <div *ngIf="form.controls['editora'].invalid && form.controls['editora'].touched" class="text-danger mt-1">
+        Campo obrigatório
+      </div>
+    </div>
+
+    <!-- Edição -->
+    <div class="mb-3">
+      <label class="form-label">Edição*</label>
+      <input type="number" class="form-control" formControlName="edicao">
+      <div *ngIf="form.controls['edicao'].invalid && form.controls['edicao'].touched" class="text-danger mt-1">
+        Campo obrigatório
+      </div>
+    </div>
+    
+    <!-- Ano de Publicação -->
+    <div class="mb-3">
+      <label class="form-label">Ano de Publicação*</label>
+      <input class="form-control" formControlName="anoPublicacao" maxlength="4" pattern="[0-9]{4}">
+      <div *ngIf="form.controls['anoPublicacao'].invalid && form.controls['anoPublicacao'].touched" class="text-danger mt-1">
+        <div *ngIf="form.controls['anoPublicacao'].errors?.['required']">
+          Ano de publicação é obrigatório
+        </div>
+        <div *ngIf="form.controls['anoPublicacao'].errors?.['pattern']">
+          Digite exatamente 4 números
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+  <label class="form-label">Valor (R$)</label>
+  <input
+    class="form-control"
+    formControlName="valor"
+    (input)="onValorChange($event)"
+    placeholder="R$ 0,00"
+  >
+</div>
+
+    <!-- Dropdown de Autores -->
+    <div class="mb-3">
+      <label class="form-label">Autores*</label>
+      <select class="form-select" formControlName="autorIds" multiple>
+        <option *ngFor="let autor of autores" [value]="autor.codAu">
+          {{ autor.nome }}
+        </option>
+      </select>
+      <div *ngIf="form.controls['autorIds'].invalid && form.controls['autorIds'].touched" class="text-danger mt-1">
+        Selecione pelo menos um autor
+      </div>
+    </div>
+
+    <!-- Dropdown de Assuntos -->
+    <div class="mb-3">
+      <label class="form-label">Assuntos*</label>
+      <select class="form-select" formControlName="assuntoIds" multiple>
+        <option *ngFor="let ass of assuntos" [value]="ass.codAs">
+          {{ ass.descricao }}
+        </option>
+      </select>
+      <div *ngIf="form.controls['assuntoIds'].invalid && form.controls['assuntoIds'].touched" class="text-danger mt-1">
+        Selecione pelo menos um assunto
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <button class="btn btn-success" type="submit">Salvar</button>
+    <a routerLink="/livros" class="btn btn-secondary ms-2">Cancelar</a>
+    <div class="mb-3"><label class="form-label">*Campos de preenchimento obrigatório</label></div>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h2>Livros</h2>
+  <div *ngIf="mensagem" class="alert alert-success">
+  {{ mensagem }}
+</div>  
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Título</th>
+        <th>Editora</th>
+        <th>Ano</th>
+        <th>Valor</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livro of livros$ | async">
+        <td>{{ livro.titulo }}</td>
+        <td>{{ livro.editora }}</td>
+        <td>{{ livro.anoPublicacao }}</td>
+        <td>{{ livro.valor | currency:'BRL' }}</td>
+        <td>
+          <a [routerLink]="['/livros', livro.cod]" class="btn btn-sm btn-warning me-2">Editar</a>
+          <button (click)="deleteLivro(livro.cod!)" class="btn btn-sm btn-danger">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

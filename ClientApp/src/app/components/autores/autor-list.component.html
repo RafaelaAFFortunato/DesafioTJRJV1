@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2>Autores</h2>
+  <div *ngIf="mensagem" class="alert alert-success">
+  {{ mensagem }}
+</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let autor of autores$ | async">
+        <td>{{ autor.nome }}</td>
+        <td>
+          <a [routerLink]="['/autores', autor.codAu]" class="btn btn-sm btn-warning me-2">Editar</a>
+          <button class="btn btn-sm btn-danger" (click)="deleteAutor(autor.codAu!)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

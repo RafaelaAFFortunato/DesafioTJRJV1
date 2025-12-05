@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2>Assuntos</h2>
+  <div *ngIf="mensagem" class="alert alert-success">
+  {{ mensagem }}
+</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ass of assuntos$ | async">
+        <td>{{ ass.descricao }}</td>
+        <td>
+          <a [routerLink]="['/assuntos', ass.codAs]" class="btn btn-sm btn-warning me-2">Editar</a>
+          <button class="btn btn-sm btn-danger" (click)="deleteAssunto(ass.codAs!)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
