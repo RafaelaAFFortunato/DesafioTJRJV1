@@ -22,3 +22,6 @@ Este projeto é um sistema de biblioteca com backend em .NET 6 e frontend em Ang
 cd WebApplication1
 dotnet restore
 dotnet run
+
+###Link para aplicação
+https://localhost:5001/index.html
